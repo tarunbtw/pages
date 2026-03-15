@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini SIH 2026 | Payment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f6f6f3;
+      --white: #ffffff;
+      --border: #e8e8e3;
+      --text: #1a1a1a;
+      --text-muted: #8a8a85;
+      --text-light: #b5b5b0;
+      --error: #e5484d;
+      --success: #30a46c;
+      --radius: 10px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--text);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      animation: fadeUp 0.45s ease both;
+      animation-delay: 0.05s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    .card-top {
+      padding: 28px 28px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .event-tag {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .card-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .card-body { padding: 24px 28px 28px; }
+
+    .form-group { margin-bottom: 16px; }
+
+    label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    input {
+      width: 100%;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 13px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input::placeholder { color: var(--text-light); }
+
+    input:focus {
+      border-color: #aaa;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+    }
+
+    input.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(229,72,77,0.08);
+    }
+
+    /* Phone input with +91 prefix */
+    .phone-wrap {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .phone-wrap:focus-within {
+      border-color: #aaa;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+    }
+
+    .phone-wrap.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(229,72,77,0.08);
+    }
+
+    .phone-prefix {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      background: #fafaf8;
+      border-right: 1px solid var(--border);
+      font-size: 13.5px;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .phone-wrap input {
+      border: none;
+      border-radius: 0;
+      box-shadow: none !important;
+    }
+
+    .phone-wrap input:focus {
+      border: none;
+      box-shadow: none !important;
+    }
+
+    .field-error {
+      font-size: 12px;
+      color: var(--error);
+      margin-top: 5px;
+      display: none;
+    }
+
+    .field-error.show { display: block; }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    .amount-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .amount-label { font-size: 13px; color: var(--text-muted); }
+
+    .amount-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .pay-btn {
+      width: 100%;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 12px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pay-btn:hover:not(:disabled) {
+      background: #333;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .pay-btn:active:not(:disabled) { transform: scale(0.99); }
+    .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .btn-loader {
+      display: none;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    .pay-btn.loading .btn-text { display: none; }
+    .pay-btn.loading .btn-loader { display: block; }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 11.5px;
+      color: var(--text-light);
+      margin-top: 14px;
+    }
+
+    .success-state { display: none; text-align: center; padding: 12px 0 4px; }
+    .success-state.show { display: block; }
+    .form-state.hide { display: none; }
+
+    .success-icon {
+      width: 44px;
+      height: 44px;
+      background: #f0faf5;
+      border: 1px solid #c8ead8;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .success-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .success-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .redirect-note { font-size: 12px; color: var(--text-light); }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--text-light);
+      text-align: center;
+      animation: fadeUp 0.5s ease both;
+      animation-delay: 0.15s;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(60px);
+      background: #1a1a1a;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      transition: transform 0.25s ease;
+      z-index: 100;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 440px) {
+      .card-top, .card-body { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="logo">
+    <div class="logo-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+        <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      </svg>
+    </div>
+    <span class="logo-name">InnovateX</span>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="event-tag">Mini SIH 2026</div>
+      <div class="card-title">Team Registration</div>
+      <div class="card-sub">Presidency University · 6–7 April 2026</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="form-state" id="formState">
+
+        <div class="form-group">
+          <label for="team_name">Team name</label>
+          <input type="text" id="team_name" placeholder="e.g. Team Nexus" autocomplete="off"/>
+          <div class="field-error" id="err_team">Please enter your team name.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="leader_name">Team leader name</label>
+          <input type="text" id="leader_name" placeholder="Full name" autocomplete="off"/>
+          <div class="field-error" id="err_leader">Please enter the leader's name.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Leader email</label>
+          <input type="email" id="email" placeholder="you@example.com" autocomplete="off"/>
+          <div class="field-error" id="err_email">Please enter a valid email address.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Leader phone</label>
+          <div class="phone-wrap" id="phone_wrap">
+            <span class="phone-prefix">🇮🇳 +91</span>
+            <input type="tel" id="phone" placeholder="98765 43210" maxlength="10" autocomplete="off"/>
+          </div>
+          <div class="field-error" id="err_phone">Please enter a valid 10-digit phone number.</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="amount-row">
+          <span class="amount-label">Registration fee</span>
+          <span class="amount-value">₹1,200</span>
+        </div>
+
+        <button class="pay-btn" id="payBtn">
+          <span class="btn-text">Pay ₹1,200</span>
+          <div class="btn-loader"></div>
+        </button>
+
+        <div class="secure-note">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Secured by Razorpay
+        </div>
+      </div>
+
+      <div class="success-state" id="successState">
+        <div class="success-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#30a46c" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="success-title">Payment confirmed</div>
+        <div class="success-sub">Your team is registered for Mini SIH 2026. Check your email for details.</div>
+        <div class="redirect-note">Redirecting to portal...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">Presidency University, Bengaluru · 24-hour hackathon</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // Only allow digits in phone field
+  document.getElementById("phone").addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, "");
+  });
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 4000);
+  }
+
+  function setLoading(on) {
+    const btn = document.getElementById("payBtn");
+    btn.disabled = on;
+    btn.classList.toggle("loading", on);
+  }
+
+  function validate() {
+    let ok = true;
+    const team   = document.getElementById("team_name").value.trim();
+    const leader = document.getElementById("leader_name").value.trim();
+    const email  = document.getElementById("email").value.trim();
+    const phone  = document.getElementById("phone").value.trim();
+
+    // Reset all errors
+    ["team_name","leader_name","email","phone"].forEach(id =>
+      document.getElementById(id).classList.remove("error"));
+    ["err_team","err_leader","err_email","err_phone"].forEach(id =>
+      document.getElementById(id).classList.remove("show"));
+    document.getElementById("phone_wrap").classList.remove("error");
+
+    if (!team) {
+      document.getElementById("team_name").classList.add("error");
+      document.getElementById("err_team").classList.add("show");
+      ok = false;
+    }
+    if (!leader) {
+      document.getElementById("leader_name").classList.add("error");
+      document.getElementById("err_leader").classList.add("show");
+      ok = false;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById("email").classList.add("error");
+      document.getElementById("err_email").classList.add("show");
+      ok = false;
+    }
+    if (!phone || !/^\d{10}$/.test(phone)) {
+      document.getElementById("phone_wrap").classList.add("error");
+      document.getElementById("err_phone").classList.add("show");
+      ok = false;
+    }
+
+    return ok;
+  }
+
+  async function handlePayment() {
+    if (!validate()) return;
+
+    const team_name   = document.getElementById("team_name").value.trim();
+    const leader_name = document.getElementById("leader_name").value.trim();
+    const email       = document.getElementById("email").value.trim();
+    const phone       = "+91" + document.getElementById("phone").value.trim();
+
+    setLoading(true);
+
+    try {
+      const res  = await fetch("/create-order", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ team_name, leader_name, email, phone }),
+      });
+      const data = await res.json();
+      if (!data.success) { showToast(data.error || "Could not initiate payment."); setLoading(false); return; }
+
+      const rzp = new Razorpay({
+        key: data.key_id, amount: data.amount, currency: "INR",
+        name: "InnovateX", description: "Mini SIH 2026 · Team Registration",
+        order_id: data.order_id,
+        prefill: { name: leader_name, email, contact: phone },
+        theme: { color: "#1a1a1a" },
+        modal: { ondismiss: () => setLoading(false) },
+        handler: async function(response) {
+          try {
+            const vRes  = await fetch("/verify-payment", {
+              method: "POST", headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                razorpay_order_id:   response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature:  response.razorpay_signature,
+              }),
+            });
+            const vData = await vRes.json();
+            if (vData.success) {
+              document.getElementById("formState").classList.add("hide");
+              document.getElementById("successState").classList.add("show");
+              setTimeout(() => { window.location.href = vData.redirect_url; }, 2500);
+            } else {
+              showToast("Verification failed. Please contact support.");
+              setLoading(false);
+            }
+          } catch { showToast("Verification error. Contact support."); setLoading(false); }
+        },
+      });
+      rzp.open();
+    } catch { showToast("Something went wrong. Please try again."); setLoading(false); }
+  }
+
+  document.getElementById("payBtn").addEventListener("click", handlePayment);
+</script>
+
+</body>
+</html>
