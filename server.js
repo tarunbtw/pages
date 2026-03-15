@@ -3,10 +3,9 @@ const express   = require("express");
 const cors      = require("cors");
 const helmet    = require("helmet");
 const path      = require("path");
-const fs        = require("fs");
 const crypto    = require("crypto");
-const initSqlJs = require("sql.js");
 const Razorpay  = require("razorpay");
+const { createClient } = require("@supabase/supabase-js");
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +17,12 @@ app.use(helmet({
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+// ── Supabase ──────────────────────────────────────
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY
+);
 
 // ── Razorpay ──────────────────────────────────────
 const razorpay = new Razorpay({
@@ -37,7 +42,6 @@ app.post("/create-order", async (req, res) => {
     return res.status(400).json({ success: false, error: "All fields are required." });
   }
 
-  // Validate phone — must be +91 followed by 10 digits
   if (!/^\+91\d{10}$/.test(phone)) {
     return res.status(400).json({ success: false, error: "Invalid phone number." });
   }
@@ -51,12 +55,21 @@ app.post("/create-order", async (req, res) => {
       receipt: `MINISIH_${Date.now()}`,
     });
 
-    db.run(
-      `INSERT INTO registrations (team_name, leader_name, email, phone, razorpay_order_id, amount)
-       VALUES (?, ?, ?, ?, ?, ?)`,
-      [team_name.trim(), leader_name.trim(), email.trim().toLowerCase(), phone.trim(), order.id, amount]
-    );
-    saveDatabase();
+    // Save pending record to Supabase
+    const { error } = await supabase.from("registrations").insert({
+      team_name:          team_name.trim(),
+      leader_name:        leader_name.trim(),
+      email:              email.trim().toLowerCase(),
+      phone:              phone.trim(),
+      razorpay_order_id:  order.id,
+      amount,
+      status:             "pending",
+    });
+
+    if (error) {
+      console.error("Supabase insert error:", error);
+      return res.status(500).json({ success: false, error: "Could not save registration." });
+    }
 
     return res.json({
       success:  true,
@@ -78,21 +91,23 @@ app.post("/verify-payment", async (req, res) => {
     return res.status(400).json({ success: false, error: "Missing payment fields." });
   }
 
-  const rows = db.exec(
-    `SELECT id, status FROM registrations WHERE razorpay_order_id = ? LIMIT 1`,
-    [razorpay_order_id]
-  );
-  if (!rows.length || !rows[0].values.length) {
+  // Check order exists in Supabase
+  const { data, error } = await supabase
+    .from("registrations")
+    .select("id, status")
+    .eq("razorpay_order_id", razorpay_order_id)
+    .single();
+
+  if (error || !data) {
     console.warn("⚠️ Unknown order_id:", razorpay_order_id);
     return res.status(404).json({ success: false, error: "Order not found." });
   }
 
-  const status = rows[0].values[0][1];
-
-  if (status === "paid") {
+  if (data.status === "paid") {
     return res.status(409).json({ success: false, error: "Order already paid." });
   }
 
+  // HMAC signature verification
   const body     = razorpay_order_id + "|" + razorpay_payment_id;
   const expected = crypto
     .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
@@ -110,13 +125,27 @@ app.post("/verify-payment", async (req, res) => {
     return res.status(400).json({ success: false, error: "Payment verification failed." });
   }
 
-  db.run(
-    `UPDATE registrations
-     SET status = 'paid', razorpay_payment_id = ?, paid_at = datetime('now')
-     WHERE razorpay_order_id = ?`,
-    [razorpay_payment_id, razorpay_order_id]
-  );
-  saveDatabase();
+  // Double check with Razorpay API
+  const payment = await razorpay.payments.fetch(razorpay_payment_id);
+  if (payment.status !== "captured") {
+    console.error(`🚨 Payment not captured — status: ${payment.status}`);
+    return res.status(400).json({ success: false, error: "Payment not completed." });
+  }
+
+  // Mark as paid in Supabase
+  const { error: updateError } = await supabase
+    .from("registrations")
+    .update({
+      status:              "paid",
+      razorpay_payment_id: razorpay_payment_id,
+      paid_at:             new Date().toISOString(),
+    })
+    .eq("razorpay_order_id", razorpay_order_id);
+
+  if (updateError) {
+    console.error("Supabase update error:", updateError);
+    return res.status(500).json({ success: false, error: "Could not update payment status." });
+  }
 
   console.log(`✅ Payment verified: ${razorpay_payment_id}`);
 
@@ -126,50 +155,7 @@ app.post("/verify-payment", async (req, res) => {
   });
 });
 
-// ── Database ──────────────────────────────────────
-const DB_PATH = path.join(__dirname, "db", "registrations.json");
-let db;
-
-async function initDatabase() {
-  const SQL = await initSqlJs();
-
-  if (fs.existsSync(DB_PATH)) {
-    const fileBuffer = fs.readFileSync(DB_PATH);
-    const data = JSON.parse(fileBuffer.toString());
-    db = new SQL.Database(new Uint8Array(data));
-  } else {
-    db = new SQL.Database();
-  }
-
-  db.run(`
-    CREATE TABLE IF NOT EXISTS registrations (
-      id                  INTEGER PRIMARY KEY AUTOINCREMENT,
-      team_name           TEXT NOT NULL,
-      leader_name         TEXT NOT NULL,
-      email               TEXT NOT NULL,
-      phone               TEXT NOT NULL,
-      razorpay_order_id   TEXT UNIQUE NOT NULL,
-      razorpay_payment_id TEXT UNIQUE,
-      amount              INTEGER NOT NULL,
-      status              TEXT DEFAULT 'pending',
-      created_at          TEXT DEFAULT (datetime('now')),
-      paid_at             TEXT
-    )
-  `);
-
-  saveDatabase();
-  console.log("✅ Database ready");
-}
-
-function saveDatabase() {
-  const data = db.export();
-  fs.mkdirSync(path.join(__dirname, "db"), { recursive: true });
-  fs.writeFileSync(DB_PATH, JSON.stringify(Array.from(data)));
-}
-
 // ── Start ─────────────────────────────────────────
-initDatabase().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
