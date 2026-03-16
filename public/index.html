@@ -3,22 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mini SIH 2026 | Payment</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <title>Mini SIH 2026 | Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f6f6f3;
-      --white: #ffffff;
-      --border: #e8e8e3;
-      --text: #1a1a1a;
-      --text-muted: #8a8a85;
-      --text-light: #b5b5b0;
-      --error: #e5484d;
-      --success: #30a46c;
-      --radius: 10px;
+      --bg: #000000;
+      --surface: #0a0a0a;
+      --surface2: #111111;
+      --border2: #222222;
+      --text: #ededed;
+      --text-muted: #888888;
+      --text-light: #444444;
+      --error: #ff4444;
+      --radius: 8px;
     }
 
     html, body {
@@ -34,98 +33,125 @@
     .page {
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px;
+      padding: 24px 16px;
     }
 
-    .logo {
+    .container {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 32px;
+      width: 100%;
+      max-width: 880px;
+      min-height: 540px;
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      overflow: hidden;
       animation: fadeUp 0.4s ease both;
     }
 
-    .logo-mark {
-      width: 28px;
-      height: 28px;
-      background: var(--text);
-      border-radius: 7px;
+    /* ── LEFT ── */
+    .left {
+      width: 320px;
+      flex-shrink: 0;
+      background: var(--surface);
+      border-right: 1px solid var(--border2);
+      padding: 36px 32px;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .logo-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: -0.01em;
+    .left-logo { display: flex; align-items: center; gap: 9px; }
+
+    .left-logo-mark {
+      width: 30px; height: 30px;
+      background: #fff;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .card {
-      width: 100%;
-      max-width: 400px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      animation: fadeUp 0.45s ease both;
-      animation-delay: 0.05s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+    .left-logo-name {
+      font-size: 14px; font-weight: 600;
+      color: var(--text); letter-spacing: -0.01em;
     }
 
-    .card-top {
-      padding: 28px 28px 24px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .event-tag {
-      font-size: 11px;
-      font-weight: 500;
+    .left-eyebrow {
+      font-size: 11px; font-weight: 500;
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 10px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 12px;
     }
 
-    .card-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      margin-bottom: 4px;
+    .left-title {
+      font-size: 20px; font-weight: 700;
+      color: var(--text); letter-spacing: -0.03em;
+      line-height: 1.3; margin-bottom: 12px;
     }
 
-    .card-sub {
-      font-size: 13px;
-      color: var(--text-muted);
+    .left-desc {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.65; margin-bottom: 24px;
     }
 
-    .card-body { padding: 24px 28px 28px; }
+    .left-items { display: flex; flex-direction: column; gap: 10px; }
 
-    .form-group { margin-bottom: 16px; }
+    .left-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 12.5px; color: var(--text-muted);
+    }
+
+    .left-item-icon {
+      width: 28px; height: 28px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mobile-badge { display: none; }
+
+    /* ── RIGHT ── */
+    .right {
+      flex: 1; background: var(--bg);
+      padding: 40px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    /* ── STEPS ── */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    .step-title {
+      font-size: 22px; font-weight: 700;
+      color: var(--text); letter-spacing: -0.03em; margin-bottom: 6px;
+    }
+
+    .step-sub {
+      font-size: 13px; color: var(--text-muted); margin-bottom: 28px;
+    }
+
+    /* Form */
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 12px;
+    }
+
+    .form-group { position: relative; }
 
     label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 6px;
-      letter-spacing: -0.01em;
+      display: block; font-size: 12px; font-weight: 500;
+      color: var(--text-muted); margin-bottom: 6px; letter-spacing: 0.01em;
     }
 
     input {
       width: 100%;
-      background: var(--white);
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border: 1px solid var(--border2);
       border-radius: var(--radius);
-      padding: 10px 13px;
+      padding: 9px 12px;
       font-family: 'Inter', sans-serif;
-      font-size: 13.5px;
-      color: var(--text);
+      font-size: 13.5px; color: var(--text);
       outline: none;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
@@ -133,192 +159,242 @@
     input::placeholder { color: var(--text-light); }
 
     input:focus {
-      border-color: #aaa;
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+      border-color: #444;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
     }
 
-    input.error {
-      border-color: var(--error);
-      box-shadow: 0 0 0 3px rgba(229,72,77,0.08);
-    }
+    input.error { border-color: var(--error); }
 
-    /* Phone input with +91 prefix */
     .phone-wrap {
       display: flex;
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border: 1px solid var(--border2);
       border-radius: var(--radius);
       overflow: hidden;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     .phone-wrap:focus-within {
-      border-color: #aaa;
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+      border-color: #444;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
     }
 
-    .phone-wrap.error {
-      border-color: var(--error);
-      box-shadow: 0 0 0 3px rgba(229,72,77,0.08);
-    }
+    .phone-wrap.error { border-color: var(--error); }
 
     .phone-prefix {
-      display: flex;
-      align-items: center;
-      padding: 10px 12px;
-      background: #fafaf8;
-      border-right: 1px solid var(--border);
-      font-size: 13.5px;
-      color: var(--text-muted);
-      font-family: 'Inter', sans-serif;
-      white-space: nowrap;
-      user-select: none;
+      display: flex; align-items: center;
+      padding: 9px 11px;
+      border-right: 1px solid var(--border2);
+      font-size: 13px; color: var(--text-muted);
+      white-space: nowrap; user-select: none;
     }
 
     .phone-wrap input {
-      border: none;
-      border-radius: 0;
-      box-shadow: none !important;
+      border: none; border-radius: 0;
+      background: transparent; box-shadow: none !important;
     }
 
-    .phone-wrap input:focus {
-      border: none;
-      box-shadow: none !important;
-    }
+    .phone-wrap input:focus { border: none; box-shadow: none !important; }
 
     .field-error {
-      font-size: 12px;
-      color: var(--error);
-      margin-top: 5px;
-      display: none;
+      font-size: 11px; color: var(--error);
+      margin-top: 4px; display: none;
     }
 
     .field-error.show { display: block; }
 
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 20px 0;
-    }
-
+    /* Amount row */
     .amount-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .amount-label { font-size: 13px; color: var(--text-muted); }
-
-    .amount-value {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-
-    .pay-btn {
-      width: 100%;
-      background: var(--text);
-      color: #fff;
-      border: none;
+      display: flex; align-items: center; justify-content: space-between;
+      border: 1px solid var(--border2);
       border-radius: var(--radius);
-      padding: 12px 20px;
+      padding: 12px 14px; margin: 16px 0;
+      background: var(--surface);
+    }
+
+    .amount-left { display: flex; flex-direction: column; gap: 2px; }
+    .amount-label { font-size: 12px; color: var(--text-muted); }
+    .amount-note { font-size: 11px; color: var(--text-light); }
+    .amount-value {
+      font-size: 20px; font-weight: 700;
+      color: var(--text); letter-spacing: -0.03em;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      width: 100%;
+      background: #fff; color: #000;
+      border: none; border-radius: var(--radius);
+      padding: 11px 20px;
       font-family: 'Inter', sans-serif;
-      font-size: 13.5px;
-      font-weight: 500;
+      font-size: 13.5px; font-weight: 600;
       cursor: pointer;
-      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      transition: background 0.15s, transform 0.1s;
+      display: flex; align-items: center; justify-content: center;
+      letter-spacing: -0.01em;
     }
 
-    .pay-btn:hover:not(:disabled) {
-      background: #333;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    .btn-primary:hover:not(:disabled) { background: #e5e5e5; }
+    .btn-primary:active:not(:disabled) { transform: scale(0.99); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-secondary {
+      width: 100%;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      padding: 10px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+      margin-top: 10px;
     }
 
-    .pay-btn:active:not(:disabled) { transform: scale(0.99); }
-    .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-secondary:hover { border-color: #444; color: var(--text); }
 
     .btn-loader {
       display: none;
-      width: 14px;
-      height: 14px;
-      border: 1.5px solid rgba(255,255,255,0.3);
-      border-top-color: #fff;
+      width: 14px; height: 14px;
+      border: 2px solid rgba(0,0,0,0.2);
+      border-top-color: #000;
       border-radius: 50%;
       animation: spin 0.6s linear infinite;
     }
 
-    .pay-btn.loading .btn-text { display: none; }
-    .pay-btn.loading .btn-loader { display: block; }
+    .btn-primary.loading .btn-text { display: none; }
+    .btn-primary.loading .btn-loader { display: block; }
 
     .secure-note {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      font-size: 11.5px;
-      color: var(--text-light);
-      margin-top: 14px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 5px; font-size: 11px; color: var(--text-light); margin-top: 12px;
     }
 
-    .success-state { display: none; text-align: center; padding: 12px 0 4px; }
-    .success-state.show { display: block; }
-    .form-state.hide { display: none; }
-
-    .success-icon {
-      width: 44px;
-      height: 44px;
-      background: #f0faf5;
-      border: 1px solid #c8ead8;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-    }
-
-    .success-title {
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
-    }
-
-    .success-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      line-height: 1.5;
-    }
-
-    .redirect-note { font-size: 12px; color: var(--text-light); }
-
-    .footer {
-      margin-top: 24px;
-      font-size: 12px;
-      color: var(--text-light);
-      text-align: center;
-      animation: fadeUp 0.5s ease both;
-      animation-delay: 0.15s;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(60px);
-      background: #1a1a1a;
-      color: #fff;
-      padding: 10px 18px;
+    /* ── QR Step ── */
+    .qr-box {
+      display: flex; flex-direction: column; align-items: center;
+      border: 1px solid var(--border2);
       border-radius: var(--radius);
-      font-size: 13px;
+      padding: 24px; margin-bottom: 16px;
+      background: var(--surface);
+      gap: 12px;
+    }
+
+    .qr-box img {
+      width: 180px; height: 180px;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+    }
+
+    .qr-upi {
+      font-size: 13px; color: var(--text-muted); text-align: center;
+    }
+
+    .qr-upi span {
+      display: block; font-size: 15px; font-weight: 600;
+      color: var(--text); letter-spacing: -0.01em; margin-top: 2px;
+    }
+
+    .qr-amount {
+      font-size: 12px; color: var(--text-muted); text-align: center;
+    }
+
+    .qr-amount span {
+      font-size: 22px; font-weight: 700;
+      color: var(--text); display: block;
+      letter-spacing: -0.03em;
+    }
+
+    .qr-steps {
+      width: 100%;
+      border-top: 1px solid var(--border2);
+      padding-top: 12px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+
+    .qr-step-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    .qr-step-num {
+      width: 18px; height: 18px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: var(--text-muted);
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* UTR input box */
+    .utr-box {
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      padding: 20px; margin-bottom: 16px;
+      background: var(--surface);
+    }
+
+    .utr-label {
+      font-size: 12px; font-weight: 500;
+      color: var(--text-muted); margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+
+    .utr-hint {
+      font-size: 11px; color: var(--text-light); margin-top: 6px;
+    }
+
+    /* Confirmation */
+    .confirm-icon {
+      width: 52px; height: 52px;
+      background: #0a1a0a;
+      border: 1px solid #1a3a1a;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+    }
+
+    .confirm-title {
+      font-size: 20px; font-weight: 700;
+      color: var(--text); letter-spacing: -0.03em;
+      margin-bottom: 8px; text-align: center;
+    }
+
+    .confirm-sub {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.65; text-align: center; margin-bottom: 20px;
+    }
+
+    .confirm-details {
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .confirm-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border2);
+      font-size: 12.5px;
+    }
+
+    .confirm-row:last-child { border-bottom: none; }
+    .confirm-row-label { color: var(--text-muted); }
+    .confirm-row-value { color: var(--text); font-weight: 500; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(60px);
+      background: #fff; color: #000;
+      padding: 10px 18px; border-radius: var(--radius);
+      font-size: 13px; font-weight: 500;
       transition: transform 0.25s ease;
-      z-index: 100;
-      white-space: nowrap;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      z-index: 100; white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
     .toast.show { transform: translateX(-50%) translateY(0); }
@@ -330,107 +406,255 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    @media (max-width: 440px) {
-      .card-top, .card-body { padding: 22px; }
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column; min-height: unset; border-radius: 12px;
+      }
+
+      .left {
+        width: 100%; flex-direction: row; align-items: center;
+        justify-content: space-between;
+        padding: 14px 20px;
+        border-right: none; border-bottom: 1px solid var(--border2);
+      }
+
+      .left-bottom { display: none; }
+      .mobile-badge {
+        display: block; font-size: 11px; font-weight: 500;
+        color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em;
+      }
+
+      .right { padding: 24px 20px 28px; justify-content: flex-start; }
+      .step-title { font-size: 18px; }
+      .step-sub { font-size: 12.5px; margin-bottom: 20px; }
+
+      .form-row { grid-template-columns: 1fr; gap: 14px; margin-bottom: 0; }
+      .amount-row { margin: 14px 0; }
     }
   </style>
 </head>
 <body>
 
 <div class="page">
+  <div class="container">
 
-  <div class="logo">
-    <div class="logo-mark">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
-        <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-      </svg>
-    </div>
-    <span class="logo-name">InnovateX</span>
-  </div>
-
-  <div class="card">
-    <div class="card-top">
-      <div class="event-tag">Mini SIH 2026</div>
-      <div class="card-title">Team Registration</div>
-      <div class="card-sub">Presidency University · 6–7 April 2026</div>
-    </div>
-
-    <div class="card-body">
-
-      <div class="form-state" id="formState">
-
-        <div class="form-group">
-          <label for="team_name">Team name</label>
-          <input type="text" id="team_name" placeholder="e.g. Team Nexus" autocomplete="off"/>
-          <div class="field-error" id="err_team">Please enter your team name.</div>
+    <!-- LEFT -->
+    <div class="left">
+      <div class="left-logo">
+        <div class="left-logo-mark">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5">
+            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
         </div>
+        <span class="left-logo-name">InnovateX</span>
+      </div>
+      <span class="mobile-badge">Mini SIH 2026</span>
 
-        <div class="form-group">
-          <label for="leader_name">Team leader name</label>
-          <input type="text" id="leader_name" placeholder="Full name" autocomplete="off"/>
-          <div class="field-error" id="err_leader">Please enter the leader's name.</div>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Leader email</label>
-          <input type="email" id="email" placeholder="you@example.com" autocomplete="off"/>
-          <div class="field-error" id="err_email">Please enter a valid email address.</div>
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Leader phone</label>
-          <div class="phone-wrap" id="phone_wrap">
-            <span class="phone-prefix">🇮🇳 +91</span>
-            <input type="tel" id="phone" placeholder="98765 43210" maxlength="10" autocomplete="off"/>
+      <div class="left-bottom">
+        <div class="left-eyebrow">Mini SIH 2026</div>
+        <div class="left-title">24-Hour Innovation Hackathon</div>
+        <div class="left-desc">Build impactful solutions, compete across tracks, and win from a ₹45,000 prize pool.</div>
+        <div class="left-items">
+          <div class="left-item">
+            <div class="left-item-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            6–7 April 2026
           </div>
-          <div class="field-error" id="err_phone">Please enter a valid 10-digit phone number.</div>
+          <div class="left-item">
+            <div class="left-item-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+              </svg>
+            </div>
+            Presidency University, Bengaluru
+          </div>
+          <div class="left-item">
+            <div class="left-item-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            24-hour non-stop offline event
+          </div>
+          <div class="left-item">
+            <div class="left-item-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            ₹45,000 total prize pool
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="divider"></div>
+    <!-- RIGHT -->
+    <div class="right">
+
+      <!-- STEP 1: Form -->
+      <div class="step active" id="step1">
+        <div class="step-title">Register your team</div>
+        <div class="step-sub">Enter your details to proceed with payment.</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="team_name">Team name</label>
+            <input type="text" id="team_name" placeholder="e.g. Team Nexus" autocomplete="off"/>
+            <div class="field-error" id="err_team">Required.</div>
+          </div>
+          <div class="form-group">
+            <label for="leader_name">Leader name</label>
+            <input type="text" id="leader_name" placeholder="Full name" autocomplete="off"/>
+            <div class="field-error" id="err_leader">Required.</div>
+          </div>
+          <div class="form-group">
+            <label for="email">Leader email</label>
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="off"/>
+            <div class="field-error" id="err_email">Enter a valid email.</div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Leader phone</label>
+            <div class="phone-wrap" id="phone_wrap">
+              <span class="phone-prefix">🇮🇳 +91</span>
+              <input type="tel" id="phone" placeholder="98765 43210" maxlength="10" autocomplete="off"/>
+            </div>
+            <div class="field-error" id="err_phone">Enter valid 10-digit number.</div>
+          </div>
+        </div>
 
         <div class="amount-row">
-          <span class="amount-label">Registration fee</span>
+          <div class="amount-left">
+            <span class="amount-label">Registration fee</span>
+            <span class="amount-note">One-time · Non-refundable</span>
+          </div>
           <span class="amount-value">₹1,200</span>
         </div>
 
-        <button class="pay-btn" id="payBtn">
-          <span class="btn-text">Pay ₹1,200</span>
+        <button class="btn-primary" id="proceedBtn">
+          <span class="btn-text">Proceed to Pay ₹1,200</span>
           <div class="btn-loader"></div>
         </button>
 
         <div class="secure-note">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          Secured by Razorpay
+          Secure · UPI Payment
         </div>
       </div>
 
-      <div class="success-state" id="successState">
-        <div class="success-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#30a46c" stroke-width="2.5">
+      <!-- STEP 2: QR Code -->
+      <div class="step" id="step2">
+        <div class="step-title">Complete Payment</div>
+        <div class="step-sub">Scan the QR or use the UPI ID to pay ₹1,200.</div>
+
+        <div class="qr-box">
+          <img src="/qrcode.png" alt="PhonePe QR Code"/>
+          <div class="qr-amount">
+            Pay exactly
+            <span>₹1,200</span>
+          </div>
+          <div class="qr-upi">
+            UPI ID
+            <span id="upiIdDisplay">your-upi@bank</span>
+          </div>
+          <div class="qr-steps">
+            <div class="qr-step-item">
+              <div class="qr-step-num">1</div>
+              Open PhonePe, GPay, Paytm or any UPI app
+            </div>
+            <div class="qr-step-item">
+              <div class="qr-step-num">2</div>
+              Scan QR or enter UPI ID and pay ₹1,200 exactly
+            </div>
+            <div class="qr-step-item">
+              <div class="qr-step-num">3</div>
+              Note the UTR / Transaction ID from your app
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="donePayBtn">
+          <span class="btn-text">Done with Payment →</span>
+          <div class="btn-loader"></div>
+        </button>
+      </div>
+
+      <!-- STEP 3: UTR Input -->
+      <div class="step" id="step3">
+        <div class="step-title">Enter Transaction ID</div>
+        <div class="step-sub">Enter the UTR / Transaction reference number from your UPI app.</div>
+
+        <div class="utr-box">
+          <div class="utr-label">UTR / Transaction Reference Number</div>
+          <input type="text" id="utr_input" placeholder="e.g. 507341234567 or T2503151234" autocomplete="off"/>
+          <div class="utr-hint">Find this in your PhonePe/GPay transaction history under payment details.</div>
+          <div class="field-error" id="err_utr">Please enter a valid UTR number.</div>
+        </div>
+
+        <button class="btn-primary" id="submitUtrBtn">
+          <span class="btn-text">Submit</span>
+          <div class="btn-loader"></div>
+        </button>
+        <button class="btn-secondary" id="backToQrBtn">← Back to QR</button>
+      </div>
+
+      <!-- STEP 4: Confirmation -->
+      <div class="step" id="step4">
+        <div class="confirm-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00c851" stroke-width="2.5">
             <polyline points="20 6 9 17 4 12"/>
           </svg>
         </div>
-        <div class="success-title">Payment confirmed</div>
-        <div class="success-sub">Your team is registered for Mini SIH 2026. Check your email for details.</div>
-        <div class="redirect-note">Redirecting to portal...</div>
+        <div class="confirm-title">Request Received!</div>
+        <div class="confirm-sub">
+          We've received your registration and payment details.<br/>
+          You'll receive a confirmation email once we verify your payment — usually within 24 hours.
+        </div>
+
+        <div class="confirm-details" id="confirmDetails">
+          <div class="confirm-row">
+            <span class="confirm-row-label">Team Name</span>
+            <span class="confirm-row-value" id="conf_team">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-row-label">Leader</span>
+            <span class="confirm-row-value" id="conf_leader">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-row-label">Email</span>
+            <span class="confirm-row-value" id="conf_email">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-row-label">UTR Number</span>
+            <span class="confirm-row-value" id="conf_utr">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-row-label">Amount</span>
+            <span class="confirm-row-value">₹1,200</span>
+          </div>
+        </div>
       </div>
 
     </div>
   </div>
-
-  <div class="footer">Presidency University, Bengaluru · 24-hour hackathon</div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-  // Only allow digits in phone field
-  document.getElementById("phone").addEventListener("input", function() {
-    this.value = this.value.replace(/\D/g, "");
-  });
+  // ── Config ──────────────────────────────────────
+  const UPI_ID = "your-upi@bank"; // 🔴 Replace with your actual UPI ID
+  document.getElementById("upiIdDisplay").textContent = UPI_ID;
 
+  // ── State ────────────────────────────────────────
+  let registrationId = null;
+
+  // ── Helpers ──────────────────────────────────────
   function showToast(msg) {
     const t = document.getElementById("toast");
     t.textContent = msg;
@@ -438,36 +662,37 @@
     setTimeout(() => t.classList.remove("show"), 4000);
   }
 
-  function setLoading(on) {
-    const btn = document.getElementById("payBtn");
+  function setLoading(btn, on) {
     btn.disabled = on;
     btn.classList.toggle("loading", on);
   }
 
-  function validate() {
+  function goToStep(n) {
+    document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+    document.getElementById("step" + n).classList.add("active");
+  }
+
+  // ── Phone digits only ────────────────────────────
+  document.getElementById("phone").addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, "");
+  });
+
+  // ── Step 1: Validate form ────────────────────────
+  function validateForm() {
     let ok = true;
     const team   = document.getElementById("team_name").value.trim();
     const leader = document.getElementById("leader_name").value.trim();
     const email  = document.getElementById("email").value.trim();
     const phone  = document.getElementById("phone").value.trim();
 
-    // Reset all errors
     ["team_name","leader_name","email","phone"].forEach(id =>
       document.getElementById(id).classList.remove("error"));
     ["err_team","err_leader","err_email","err_phone"].forEach(id =>
       document.getElementById(id).classList.remove("show"));
     document.getElementById("phone_wrap").classList.remove("error");
 
-    if (!team) {
-      document.getElementById("team_name").classList.add("error");
-      document.getElementById("err_team").classList.add("show");
-      ok = false;
-    }
-    if (!leader) {
-      document.getElementById("leader_name").classList.add("error");
-      document.getElementById("err_leader").classList.add("show");
-      ok = false;
-    }
+    if (!team)   { document.getElementById("team_name").classList.add("error");   document.getElementById("err_team").classList.add("show");   ok = false; }
+    if (!leader) { document.getElementById("leader_name").classList.add("error"); document.getElementById("err_leader").classList.add("show"); ok = false; }
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       document.getElementById("email").classList.add("error");
       document.getElementById("err_email").classList.add("show");
@@ -478,62 +703,95 @@
       document.getElementById("err_phone").classList.add("show");
       ok = false;
     }
-
     return ok;
   }
 
-  async function handlePayment() {
-    if (!validate()) return;
+  // ── Proceed button ───────────────────────────────
+  document.getElementById("proceedBtn").addEventListener("click", async () => {
+    if (!validateForm()) return;
 
+    const btn         = document.getElementById("proceedBtn");
     const team_name   = document.getElementById("team_name").value.trim();
     const leader_name = document.getElementById("leader_name").value.trim();
     const email       = document.getElementById("email").value.trim();
     const phone       = "+91" + document.getElementById("phone").value.trim();
 
-    setLoading(true);
+    setLoading(btn, true);
 
     try {
-      const res  = await fetch("/create-order", {
+      const res  = await fetch("/register", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ team_name, leader_name, email, phone }),
       });
       const data = await res.json();
-      if (!data.success) { showToast(data.error || "Could not initiate payment."); setLoading(false); return; }
 
-      const rzp = new Razorpay({
-        key: data.key_id, amount: data.amount, currency: "INR",
-        name: "InnovateX", description: "Mini SIH 2026 · Team Registration",
-        order_id: data.order_id,
-        prefill: { name: leader_name, email, contact: phone },
-        theme: { color: "#1a1a1a" },
-        modal: { ondismiss: () => setLoading(false) },
-        handler: async function(response) {
-          try {
-            const vRes  = await fetch("/verify-payment", {
-              method: "POST", headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                razorpay_order_id:   response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature:  response.razorpay_signature,
-              }),
-            });
-            const vData = await vRes.json();
-            if (vData.success) {
-              document.getElementById("formState").classList.add("hide");
-              document.getElementById("successState").classList.add("show");
-              setTimeout(() => { window.location.href = vData.redirect_url; }, 2500);
-            } else {
-              showToast("Verification failed. Please contact support.");
-              setLoading(false);
-            }
-          } catch { showToast("Verification error. Contact support."); setLoading(false); }
-        },
+      if (!data.success) {
+        showToast(data.error || "Could not save registration.");
+        setLoading(btn, false);
+        return;
+      }
+
+      registrationId = data.registration_id;
+      goToStep(2);
+
+    } catch {
+      showToast("Something went wrong. Please try again.");
+      setLoading(btn, false);
+    }
+  });
+
+  // ── Done with payment button ─────────────────────
+  document.getElementById("donePayBtn").addEventListener("click", () => {
+    goToStep(3);
+  });
+
+  // ── Back to QR button ────────────────────────────
+  document.getElementById("backToQrBtn").addEventListener("click", () => {
+    goToStep(2);
+  });
+
+  // ── Submit UTR button ────────────────────────────
+  document.getElementById("submitUtrBtn").addEventListener("click", async () => {
+    const utr = document.getElementById("utr_input").value.trim();
+    const btn = document.getElementById("submitUtrBtn");
+
+    document.getElementById("utr_input").classList.remove("error");
+    document.getElementById("err_utr").classList.remove("show");
+
+    if (!utr || !/^[a-zA-Z0-9]{6,22}$/.test(utr)) {
+      document.getElementById("utr_input").classList.add("error");
+      document.getElementById("err_utr").classList.add("show");
+      return;
+    }
+
+    setLoading(btn, true);
+
+    try {
+      const res  = await fetch("/submit-utr", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ registration_id: registrationId, utr_number: utr }),
       });
-      rzp.open();
-    } catch { showToast("Something went wrong. Please try again."); setLoading(false); }
-  }
+      const data = await res.json();
 
-  document.getElementById("payBtn").addEventListener("click", handlePayment);
+      if (!data.success) {
+        showToast(data.error || "Could not submit UTR.");
+        setLoading(btn, false);
+        return;
+      }
+
+      // Fill confirmation details
+      document.getElementById("conf_team").textContent   = document.getElementById("team_name").value.trim();
+      document.getElementById("conf_leader").textContent = document.getElementById("leader_name").value.trim();
+      document.getElementById("conf_email").textContent  = document.getElementById("email").value.trim();
+      document.getElementById("conf_utr").textContent    = utr;
+
+      goToStep(4);
+
+    } catch {
+      showToast("Something went wrong. Please try again.");
+      setLoading(btn, false);
+    }
+  });
 </script>
 
 </body>
