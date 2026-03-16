@@ -49,7 +49,7 @@
       animation: fadeUp 0.4s ease both;
     }
 
-    /* ── LEFT ── */
+    /* LEFT */
     .left {
       width: 320px;
       flex-shrink: 0;
@@ -65,45 +65,25 @@
 
     .left-logo-mark {
       width: 30px; height: 30px;
-      background: #fff;
-      border-radius: 8px;
+      background: #fff; border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
     }
 
-    .left-logo-name {
-      font-size: 14px; font-weight: 600;
-      color: var(--text); letter-spacing: -0.01em;
-    }
+    .left-logo-name { font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
 
     .left-eyebrow {
-      font-size: 11px; font-weight: 500;
-      color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.08em;
-      margin-bottom: 12px;
+      font-size: 11px; font-weight: 500; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;
     }
 
-    .left-title {
-      font-size: 20px; font-weight: 700;
-      color: var(--text); letter-spacing: -0.03em;
-      line-height: 1.3; margin-bottom: 12px;
-    }
-
-    .left-desc {
-      font-size: 13px; color: var(--text-muted);
-      line-height: 1.65; margin-bottom: 24px;
-    }
-
+    .left-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.03em; line-height: 1.3; margin-bottom: 12px; }
+    .left-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
     .left-items { display: flex; flex-direction: column; gap: 10px; }
-
-    .left-item {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 12.5px; color: var(--text-muted);
-    }
+    .left-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--text-muted); }
 
     .left-item-icon {
       width: 28px; height: 28px;
-      background: var(--surface2);
-      border: 1px solid var(--border2);
+      background: var(--surface2); border: 1px solid var(--border2);
       border-radius: 7px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
@@ -111,125 +91,78 @@
 
     .mobile-badge { display: none; }
 
-    /* ── RIGHT ── */
+    /* RIGHT */
     .right {
       flex: 1; background: var(--bg);
       padding: 40px 44px;
       display: flex; flex-direction: column; justify-content: center;
     }
 
-    /* ── STEPS ── */
+    /* STEPS */
     .step { display: none; }
     .step.active { display: block; }
 
-    .step-title {
-      font-size: 22px; font-weight: 700;
-      color: var(--text); letter-spacing: -0.03em; margin-bottom: 6px;
-    }
-
-    .step-sub {
-      font-size: 13px; color: var(--text-muted); margin-bottom: 28px;
-    }
+    .step-title { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.03em; margin-bottom: 6px; }
+    .step-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
 
     /* Form */
-    .form-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 12px; margin-bottom: 12px;
-    }
-
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
     .form-group { position: relative; }
 
-    label {
-      display: block; font-size: 12px; font-weight: 500;
-      color: var(--text-muted); margin-bottom: 6px; letter-spacing: 0.01em;
-    }
+    label { display: block; font-size: 12px; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; letter-spacing: 0.01em; }
 
     input {
       width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      padding: 9px 12px;
-      font-family: 'Inter', sans-serif;
-      font-size: 13.5px; color: var(--text);
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: var(--radius); padding: 9px 12px;
+      font-family: 'Inter', sans-serif; font-size: 13.5px; color: var(--text);
       outline: none;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     input::placeholder { color: var(--text-light); }
-
-    input:focus {
-      border-color: #444;
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
-    }
-
+    input:focus { border-color: #444; box-shadow: 0 0 0 3px rgba(255,255,255,0.04); }
     input.error { border-color: var(--error); }
 
     .phone-wrap {
-      display: flex;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      display: flex; background: var(--surface);
+      border: 1px solid var(--border2); border-radius: var(--radius);
+      overflow: hidden; transition: border-color 0.15s, box-shadow 0.15s;
     }
 
-    .phone-wrap:focus-within {
-      border-color: #444;
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
-    }
-
+    .phone-wrap:focus-within { border-color: #444; box-shadow: 0 0 0 3px rgba(255,255,255,0.04); }
     .phone-wrap.error { border-color: var(--error); }
 
     .phone-prefix {
-      display: flex; align-items: center;
-      padding: 9px 11px;
+      display: flex; align-items: center; padding: 9px 11px;
       border-right: 1px solid var(--border2);
-      font-size: 13px; color: var(--text-muted);
-      white-space: nowrap; user-select: none;
+      font-size: 13px; color: var(--text-muted); white-space: nowrap; user-select: none;
     }
 
-    .phone-wrap input {
-      border: none; border-radius: 0;
-      background: transparent; box-shadow: none !important;
-    }
-
+    .phone-wrap input { border: none; border-radius: 0; background: transparent; box-shadow: none !important; }
     .phone-wrap input:focus { border: none; box-shadow: none !important; }
 
-    .field-error {
-      font-size: 11px; color: var(--error);
-      margin-top: 4px; display: none;
-    }
-
+    .field-error { font-size: 11px; color: var(--error); margin-top: 4px; display: none; }
     .field-error.show { display: block; }
 
-    /* Amount row */
+    /* Amount */
     .amount-row {
       display: flex; align-items: center; justify-content: space-between;
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      padding: 12px 14px; margin: 16px 0;
-      background: var(--surface);
+      border: 1px solid var(--border2); border-radius: var(--radius);
+      padding: 12px 14px; margin: 16px 0; background: var(--surface);
     }
 
     .amount-left { display: flex; flex-direction: column; gap: 2px; }
     .amount-label { font-size: 12px; color: var(--text-muted); }
     .amount-note { font-size: 11px; color: var(--text-light); }
-    .amount-value {
-      font-size: 20px; font-weight: 700;
-      color: var(--text); letter-spacing: -0.03em;
-    }
+    .amount-value { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.03em; }
 
     /* Buttons */
     .btn-primary {
-      width: 100%;
-      background: #fff; color: #000;
-      border: none; border-radius: var(--radius);
-      padding: 11px 20px;
-      font-family: 'Inter', sans-serif;
-      font-size: 13.5px; font-weight: 600;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
+      width: 100%; background: #fff; color: #000;
+      border: none; border-radius: var(--radius); padding: 11px 20px;
+      font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 600;
+      cursor: pointer; transition: background 0.15s, transform 0.1s;
       display: flex; align-items: center; justify-content: center;
       letter-spacing: -0.01em;
     }
@@ -239,28 +172,19 @@
     .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
     .btn-secondary {
-      width: 100%;
-      background: transparent;
-      color: var(--text-muted);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      padding: 10px 20px;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px; font-weight: 500;
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s;
-      margin-top: 10px;
+      width: 100%; background: transparent; color: var(--text-muted);
+      border: 1px solid var(--border2); border-radius: var(--radius);
+      padding: 10px 20px; font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500; cursor: pointer;
+      transition: border-color 0.15s, color 0.15s; margin-top: 10px;
     }
 
     .btn-secondary:hover { border-color: #444; color: var(--text); }
 
     .btn-loader {
-      display: none;
-      width: 14px; height: 14px;
-      border: 2px solid rgba(0,0,0,0.2);
-      border-top-color: #000;
-      border-radius: 50%;
-      animation: spin 0.6s linear infinite;
+      display: none; width: 14px; height: 14px;
+      border: 2px solid rgba(0,0,0,0.2); border-top-color: #000;
+      border-radius: 50%; animation: spin 0.6s linear infinite;
     }
 
     .btn-primary.loading .btn-text { display: none; }
@@ -271,114 +195,56 @@
       gap: 5px; font-size: 11px; color: var(--text-light); margin-top: 12px;
     }
 
-    /* ── QR Step ── */
+    /* QR Step */
     .qr-box {
       display: flex; flex-direction: column; align-items: center;
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      padding: 24px; margin-bottom: 16px;
-      background: var(--surface);
-      gap: 12px;
+      border: 1px solid var(--border2); border-radius: var(--radius);
+      padding: 24px; margin-bottom: 16px; background: var(--surface); gap: 12px;
     }
 
-    .qr-box img {
-      width: 180px; height: 180px;
-      border-radius: 8px;
-      border: 1px solid var(--border2);
-    }
+    .qr-box img { width: 180px; height: 180px; border-radius: 8px; border: 1px solid var(--border2); object-fit: cover; }
 
-    .qr-upi {
-      font-size: 13px; color: var(--text-muted); text-align: center;
-    }
+    .qr-upi { font-size: 13px; color: var(--text-muted); text-align: center; }
+    .qr-upi span { display: block; font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin-top: 2px; }
 
-    .qr-upi span {
-      display: block; font-size: 15px; font-weight: 600;
-      color: var(--text); letter-spacing: -0.01em; margin-top: 2px;
-    }
+    .qr-amount { font-size: 12px; color: var(--text-muted); text-align: center; }
+    .qr-amount span { font-size: 22px; font-weight: 700; color: var(--text); display: block; letter-spacing: -0.03em; }
 
-    .qr-amount {
-      font-size: 12px; color: var(--text-muted); text-align: center;
-    }
+    .qr-steps { width: 100%; border-top: 1px solid var(--border2); padding-top: 12px; display: flex; flex-direction: column; gap: 6px; }
 
-    .qr-amount span {
-      font-size: 22px; font-weight: 700;
-      color: var(--text); display: block;
-      letter-spacing: -0.03em;
-    }
-
-    .qr-steps {
-      width: 100%;
-      border-top: 1px solid var(--border2);
-      padding-top: 12px;
-      display: flex; flex-direction: column; gap: 6px;
-    }
-
-    .qr-step-item {
-      display: flex; align-items: flex-start; gap: 8px;
-      font-size: 12px; color: var(--text-muted);
-    }
+    .qr-step-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--text-muted); }
 
     .qr-step-num {
-      width: 18px; height: 18px;
-      background: var(--surface2);
-      border: 1px solid var(--border2);
-      border-radius: 50%;
+      width: 18px; height: 18px; background: var(--surface2);
+      border: 1px solid var(--border2); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 10px; color: var(--text-muted);
-      flex-shrink: 0; margin-top: 1px;
+      font-size: 10px; color: var(--text-muted); flex-shrink: 0; margin-top: 1px;
     }
 
-    /* UTR input box */
+    /* UTR */
     .utr-box {
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      padding: 20px; margin-bottom: 16px;
-      background: var(--surface);
+      border: 1px solid var(--border2); border-radius: var(--radius);
+      padding: 20px; margin-bottom: 16px; background: var(--surface);
     }
 
-    .utr-label {
-      font-size: 12px; font-weight: 500;
-      color: var(--text-muted); margin-bottom: 8px;
-      letter-spacing: 0.01em;
-    }
-
-    .utr-hint {
-      font-size: 11px; color: var(--text-light); margin-top: 6px;
-    }
+    .utr-label { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.01em; }
+    .utr-hint { font-size: 11px; color: var(--text-light); margin-top: 6px; }
 
     /* Confirmation */
     .confirm-icon {
-      width: 52px; height: 52px;
-      background: #0a1a0a;
-      border: 1px solid #1a3a1a;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 18px;
+      width: 52px; height: 52px; background: #0a1a0a;
+      border: 1px solid #1a3a1a; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;
     }
 
-    .confirm-title {
-      font-size: 20px; font-weight: 700;
-      color: var(--text); letter-spacing: -0.03em;
-      margin-bottom: 8px; text-align: center;
-    }
+    .confirm-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.03em; margin-bottom: 8px; text-align: center; }
+    .confirm-sub { font-size: 13px; color: var(--text-muted); line-height: 1.65; text-align: center; margin-bottom: 20px; }
 
-    .confirm-sub {
-      font-size: 13px; color: var(--text-muted);
-      line-height: 1.65; text-align: center; margin-bottom: 20px;
-    }
-
-    .confirm-details {
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      background: var(--surface);
-      overflow: hidden;
-    }
+    .confirm-details { border: 1px solid var(--border2); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
 
     .confirm-row {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--border2);
-      font-size: 12.5px;
+      padding: 10px 14px; border-bottom: 1px solid var(--border2); font-size: 12.5px;
     }
 
     .confirm-row:last-child { border-bottom: none; }
@@ -389,46 +255,33 @@
     .toast {
       position: fixed; bottom: 24px; left: 50%;
       transform: translateX(-50%) translateY(60px);
-      background: #fff; color: #000;
-      padding: 10px 18px; border-radius: var(--radius);
-      font-size: 13px; font-weight: 500;
-      transition: transform 0.25s ease;
-      z-index: 100; white-space: nowrap;
+      background: #fff; color: #000; padding: 10px 18px;
+      border-radius: var(--radius); font-size: 13px; font-weight: 500;
+      transition: transform 0.25s ease; z-index: 100; white-space: nowrap;
       box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
     .toast.show { transform: translateX(-50%) translateY(0); }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── MOBILE ── */
+    /* MOBILE */
     @media (max-width: 700px) {
-      .container {
-        flex-direction: column; min-height: unset; border-radius: 12px;
-      }
+      .container { flex-direction: column; min-height: unset; border-radius: 12px; }
 
       .left {
         width: 100%; flex-direction: row; align-items: center;
-        justify-content: space-between;
-        padding: 14px 20px;
+        justify-content: space-between; padding: 14px 20px;
         border-right: none; border-bottom: 1px solid var(--border2);
       }
 
       .left-bottom { display: none; }
-      .mobile-badge {
-        display: block; font-size: 11px; font-weight: 500;
-        color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em;
-      }
+      .mobile-badge { display: block; font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
 
       .right { padding: 24px 20px 28px; justify-content: flex-start; }
       .step-title { font-size: 18px; }
       .step-sub { font-size: 12.5px; margin-bottom: 20px; }
-
       .form-row { grid-template-columns: 1fr; gap: 14px; margin-bottom: 0; }
       .amount-row { margin: 14px 0; }
     }
@@ -503,17 +356,17 @@
         <div class="form-row">
           <div class="form-group">
             <label for="team_name">Team name</label>
-            <input type="text" id="team_name" placeholder="e.g. Team Nexus" autocomplete="off"/>
+            <input type="text" id="team_name" placeholder="e.g. Team Nexus" autocomplete="off" maxlength="60"/>
             <div class="field-error" id="err_team">Required.</div>
           </div>
           <div class="form-group">
             <label for="leader_name">Leader name</label>
-            <input type="text" id="leader_name" placeholder="Full name" autocomplete="off"/>
+            <input type="text" id="leader_name" placeholder="Full name" autocomplete="off" maxlength="80"/>
             <div class="field-error" id="err_leader">Required.</div>
           </div>
           <div class="form-group">
             <label for="email">Leader email</label>
-            <input type="email" id="email" placeholder="you@example.com" autocomplete="off"/>
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="off" maxlength="100"/>
             <div class="field-error" id="err_email">Enter a valid email.</div>
           </div>
           <div class="form-group">
@@ -553,28 +406,20 @@
         <div class="step-sub">Scan the QR or use the UPI ID to pay ₹1,200.</div>
 
         <div class="qr-box">
-          <img src="/qrcode.png" alt="PhonePe QR Code"/>
-          <div class="qr-amount">
-            Pay exactly
-            <span>₹1,200</span>
+          <img src="/qrcode.jpeg" alt="UPI QR Code" onerror="this.style.display='none'; document.getElementById('qrFallback').style.display='flex'"/>
+          <div id="qrFallback" style="display:none; width:180px; height:180px; border:1px solid var(--border2); border-radius:8px; align-items:center; justify-content:center; flex-direction:column; gap:8px; font-size:12px; color:var(--text-muted); text-align:center; padding:16px;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="1.5">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+              <rect x="14" y="14" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/>
+            </svg>
+            QR not available.<br/>Use UPI ID below.
           </div>
-          <div class="qr-upi">
-            UPI ID
-            <span id="upiIdDisplay">your-upi@bank</span>
-          </div>
+          <div class="qr-amount">Pay exactly<span>₹1,200</span></div>
+          <div class="qr-upi">UPI ID<span id="upiIdDisplay">your-upi@bank</span></div>
           <div class="qr-steps">
-            <div class="qr-step-item">
-              <div class="qr-step-num">1</div>
-              Open PhonePe, GPay, Paytm or any UPI app
-            </div>
-            <div class="qr-step-item">
-              <div class="qr-step-num">2</div>
-              Scan QR or enter UPI ID and pay ₹1,200 exactly
-            </div>
-            <div class="qr-step-item">
-              <div class="qr-step-num">3</div>
-              Note the UTR / Transaction ID from your app
-            </div>
+            <div class="qr-step-item"><div class="qr-step-num">1</div>Open PhonePe, GPay, Paytm or any UPI app</div>
+            <div class="qr-step-item"><div class="qr-step-num">2</div>Scan QR or enter UPI ID and pay ₹1,200 exactly</div>
+            <div class="qr-step-item"><div class="qr-step-num">3</div>Note the UTR / Transaction ID from your app</div>
           </div>
         </div>
 
@@ -591,9 +436,9 @@
 
         <div class="utr-box">
           <div class="utr-label">UTR / Transaction Reference Number</div>
-          <input type="text" id="utr_input" placeholder="e.g. 507341234567 or T2503151234" autocomplete="off"/>
+          <input type="text" id="utr_input" placeholder="e.g. 507341234567 or T2503151234" autocomplete="off" maxlength="22"/>
           <div class="utr-hint">Find this in your PhonePe/GPay transaction history under payment details.</div>
-          <div class="field-error" id="err_utr">Please enter a valid UTR number.</div>
+          <div class="field-error" id="err_utr">Please enter a valid UTR number (6–22 characters).</div>
         </div>
 
         <button class="btn-primary" id="submitUtrBtn">
@@ -615,8 +460,7 @@
           We've received your registration and payment details.<br/>
           You'll receive a confirmation email once we verify your payment — usually within 24 hours.
         </div>
-
-        <div class="confirm-details" id="confirmDetails">
+        <div class="confirm-details">
           <div class="confirm-row">
             <span class="confirm-row-label">Team Name</span>
             <span class="confirm-row-value" id="conf_team">—</span>
@@ -647,12 +491,27 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // ── Config ──────────────────────────────────────
-  const UPI_ID = "your-upi@bank"; // 🔴 Replace with your actual UPI ID
+  // ── Config — UPDATE THIS ─────────────────────────
+  const UPI_ID = "keerthans334@okhdfcbank"; 
   document.getElementById("upiIdDisplay").textContent = UPI_ID;
 
-  // ── State ────────────────────────────────────────
-  let registrationId = null;
+  // ── Session state ────────────────────────────────
+  let registrationId = sessionStorage.getItem("sih_reg_id") || null;
+  let savedStep      = parseInt(sessionStorage.getItem("sih_step") || "1");
+
+  // Store form data in session so refresh doesn't wipe it
+  let savedForm = JSON.parse(sessionStorage.getItem("sih_form") || "{}");
+
+  // Restore form fields on refresh
+  if (savedForm.team_name)   document.getElementById("team_name").value   = savedForm.team_name;
+  if (savedForm.leader_name) document.getElementById("leader_name").value = savedForm.leader_name;
+  if (savedForm.email)       document.getElementById("email").value       = savedForm.email;
+  if (savedForm.phone)       document.getElementById("phone").value       = savedForm.phone.replace("+91", "");
+
+  // Restore step on refresh (only steps 2 & 3 — step 4 is final, 1 is always re-enterable)
+  if (registrationId && savedStep >= 2 && savedStep <= 3) {
+    goToStep(savedStep);
+  }
 
   // ── Helpers ──────────────────────────────────────
   function showToast(msg) {
@@ -670,6 +529,20 @@
   function goToStep(n) {
     document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
     document.getElementById("step" + n).classList.add("active");
+    sessionStorage.setItem("sih_step", n);
+    // Scroll to top on mobile
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function clearSession() {
+    sessionStorage.removeItem("sih_reg_id");
+    sessionStorage.removeItem("sih_step");
+    sessionStorage.removeItem("sih_form");
+  }
+
+  // Sanitize input — strip HTML/script tags
+  function sanitize(str) {
+    return str.replace(/[<>"'`]/g, "");
   }
 
   // ── Phone digits only ────────────────────────────
@@ -677,7 +550,7 @@
     this.value = this.value.replace(/\D/g, "");
   });
 
-  // ── Step 1: Validate form ────────────────────────
+  // ── Step 1: Validate ─────────────────────────────
   function validateForm() {
     let ok = true;
     const team   = document.getElementById("team_name").value.trim();
@@ -691,8 +564,8 @@
       document.getElementById(id).classList.remove("show"));
     document.getElementById("phone_wrap").classList.remove("error");
 
-    if (!team)   { document.getElementById("team_name").classList.add("error");   document.getElementById("err_team").classList.add("show");   ok = false; }
-    if (!leader) { document.getElementById("leader_name").classList.add("error"); document.getElementById("err_leader").classList.add("show"); ok = false; }
+    if (!team || team.length < 2)   { document.getElementById("team_name").classList.add("error");   document.getElementById("err_team").classList.add("show");   ok = false; }
+    if (!leader || leader.length < 2) { document.getElementById("leader_name").classList.add("error"); document.getElementById("err_leader").classList.add("show"); ok = false; }
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       document.getElementById("email").classList.add("error");
       document.getElementById("err_email").classList.add("show");
@@ -706,21 +579,25 @@
     return ok;
   }
 
-  // ── Proceed button ───────────────────────────────
+  // ── Proceed ──────────────────────────────────────
   document.getElementById("proceedBtn").addEventListener("click", async () => {
     if (!validateForm()) return;
 
     const btn         = document.getElementById("proceedBtn");
-    const team_name   = document.getElementById("team_name").value.trim();
-    const leader_name = document.getElementById("leader_name").value.trim();
-    const email       = document.getElementById("email").value.trim();
+    const team_name   = sanitize(document.getElementById("team_name").value.trim());
+    const leader_name = sanitize(document.getElementById("leader_name").value.trim());
+    const email       = document.getElementById("email").value.trim().toLowerCase();
     const phone       = "+91" + document.getElementById("phone").value.trim();
+
+    // Save form to session for refresh resilience
+    sessionStorage.setItem("sih_form", JSON.stringify({ team_name, leader_name, email, phone }));
 
     setLoading(btn, true);
 
     try {
       const res  = await fetch("/register", {
-        method: "POST", headers: { "Content-Type": "application/json" },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ team_name, leader_name, email, phone }),
       });
       const data = await res.json();
@@ -732,6 +609,7 @@
       }
 
       registrationId = data.registration_id;
+      sessionStorage.setItem("sih_reg_id", registrationId);
       goToStep(2);
 
     } catch {
@@ -740,27 +618,34 @@
     }
   });
 
-  // ── Done with payment button ─────────────────────
+  // ── Done with payment ────────────────────────────
   document.getElementById("donePayBtn").addEventListener("click", () => {
     goToStep(3);
   });
 
-  // ── Back to QR button ────────────────────────────
+  // ── Back to QR ───────────────────────────────────
   document.getElementById("backToQrBtn").addEventListener("click", () => {
     goToStep(2);
   });
 
-  // ── Submit UTR button ────────────────────────────
+  // ── Submit UTR ───────────────────────────────────
   document.getElementById("submitUtrBtn").addEventListener("click", async () => {
-    const utr = document.getElementById("utr_input").value.trim();
+    const utr = document.getElementById("utr_input").value.trim().toUpperCase();
     const btn = document.getElementById("submitUtrBtn");
 
     document.getElementById("utr_input").classList.remove("error");
     document.getElementById("err_utr").classList.remove("show");
 
-    if (!utr || !/^[a-zA-Z0-9]{6,22}$/.test(utr)) {
+    if (!utr || !/^[A-Z0-9]{6,22}$/.test(utr)) {
       document.getElementById("utr_input").classList.add("error");
       document.getElementById("err_utr").classList.add("show");
+      return;
+    }
+
+    if (!registrationId) {
+      showToast("Session expired. Please start over.");
+      clearSession();
+      goToStep(1);
       return;
     }
 
@@ -768,7 +653,8 @@
 
     try {
       const res  = await fetch("/submit-utr", {
-        method: "POST", headers: { "Content-Type": "application/json" },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ registration_id: registrationId, utr_number: utr }),
       });
       const data = await res.json();
@@ -779,12 +665,14 @@
         return;
       }
 
-      // Fill confirmation details
-      document.getElementById("conf_team").textContent   = document.getElementById("team_name").value.trim();
-      document.getElementById("conf_leader").textContent = document.getElementById("leader_name").value.trim();
-      document.getElementById("conf_email").textContent  = document.getElementById("email").value.trim();
+      // Fill confirmation
+      const form = JSON.parse(sessionStorage.getItem("sih_form") || "{}");
+      document.getElementById("conf_team").textContent   = form.team_name   || "—";
+      document.getElementById("conf_leader").textContent = form.leader_name || "—";
+      document.getElementById("conf_email").textContent  = form.email       || "—";
       document.getElementById("conf_utr").textContent    = utr;
 
+      clearSession();
       goToStep(4);
 
     } catch {

@@ -16,13 +16,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// ── Supabase ──────────────────────────────────────
+
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
 );
 
-// ── Routes ────────────────────────────────────────
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
